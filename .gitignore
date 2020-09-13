@@ -1,0 +1,12 @@
+\.pyc
+\.pyo
+\.DS_Store
+
+\.idea/
+/docker-compose.yml
+
+tmp/
+target/
+venv/
+*\.egg-info/
+.ipynb_checkpoints/
