@@ -4,7 +4,7 @@ type: docker
 name: Drone plugins CI
 
 steps:
-  - name: Build drone_ansible plugin
+  - name: Build ansible plugin
     pull: always
     image: plugins/docker
     settings:
@@ -15,7 +15,7 @@ steps:
       password:
         from_secret: docker_password
       context: ansible
-      dockerfile: Dockerfile
+      dockerfile: ansible/Dockerfile
       tags: latest
       bip: 173.17.1.2/24  # For docker in docker
     when:
