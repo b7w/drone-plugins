@@ -5,15 +5,30 @@ Drone plugins
 
 
 Build
-----
+-----
 
-`docker build -t drone/dc --build-arg HANDLER=docker-compose .`       
+```shell script
+poetry install --extras docker-compose --extras ansible
+```
 
 
-Test
-----
+Ansible playbook
+----------------
 
-`docker run --rm -v/home/user/docker-compose.yml:/docker-compose.yml:ro -eDRONE_HOST=root@example.com -eDRONE_KEY="$(< ~/.ssh/id_rsa)" -eDRONE_PROJECT=drone -eDRONE_FILE=/docker-compose.yml drone/dc:latest`       
+Build: `docker build -t drone/ansible --build-arg HANDLER=ansible .`       
+Run: `docker run --rm -v/home/user/playbook.yml:/playbook.yml:ro -ePLUGIN_VAULT_PASSWORD=root -ePLUGIN_PRIVATE_KEY="$(< ~/.ssh/id_rsa)" -ePLUGIN_PLAYBOOK=/playbook.yml drone/ansible:latest`       
+
+
+
+Docker compose
+--------------
+
+Allow execute `docker-compose up -d` on remote server over ssh 
+
+Build: `docker build -t drone/dc --build-arg HANDLER=docker-compose .`       
+Run: `docker run --rm -v/home/user/docker-compose.yml:/docker-compose.yml:ro -ePLUGIN_HOST=root@example.com -ePLUGIN_KEY="$(< ~/.ssh/id_rsa)" -ePLUGIN_PROJECT=example -ePLUGIN_FILE=/docker-compose.yml registry.b7w.me/b7w/drone-plugin/docker-compose:latest`       
+
+
 
 
 About

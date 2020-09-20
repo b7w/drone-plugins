@@ -4,19 +4,18 @@ type: docker
 name: Drone plugins CI
 
 steps:
-  - name: Build docker-compose plugin
+  - name: Build drone_ansible plugin
     pull: always
     image: plugins/docker
     settings:
       registry: registry.b7w.me
-      repo: registry.b7w.me/b7w/drone-plugin/docker-compose
+      repo: registry.b7w.me/b7w/drone-plugin/ansible
       username:
         from_secret: docker_username
       password:
         from_secret: docker_password
+      dockerfile: ansible/Dockerfile
       tags: latest
-      build_args:
-        - HANDLER=docker-compose
       bip: 173.17.1.2/24  # For docker in docker
     when:
       branch:
