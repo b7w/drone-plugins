@@ -14,7 +14,8 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      dockerfile: ansible/Dockerfile
+      context: ansible
+      dockerfile: Dockerfile
       tags: latest
       bip: 173.17.1.2/24  # For docker in docker
     when:
