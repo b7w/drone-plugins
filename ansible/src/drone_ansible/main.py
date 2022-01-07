@@ -6,13 +6,19 @@ def ansible(setting: dict):
     private_key = setting['private_key'].strip()
     vault_password = setting['vault_password'].strip()
     inventory = setting['inventory'].strip()
+    limit = setting.get('limit', '').strip()
     playbook = setting['playbook'].strip()
 
     create_ssh_key(private_key)
     vault_password_file = create_tmp_file(vault_password)
+    limit_hosts = f'--limit={limit}' if limit else ''
 
     print('Running drone_ansible-playbook...')
-    cmd(f'ansible-playbook --inventory={inventory} --vault-password-file={vault_password_file} {playbook}')
+    cmd(f'ansible-playbook'
+        f' --inventory={inventory}'
+        f' --vault-password-file={vault_password_file}'
+        f' {limit_hosts}'
+        f' {playbook}')
     print('Done')
 
 
